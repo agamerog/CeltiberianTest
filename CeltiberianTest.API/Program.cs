@@ -1,11 +1,16 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using CeltiberianTest.API.Interfaces;
+using CeltiberianTest.API.Services;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+var services = builder.Services;
+services.AddControllers();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
+services.AddScoped<IGitHubService, GitHubService>();
+services.AddScoped<IStatsService, StatsService>();
 
 var app = builder.Build();
 
